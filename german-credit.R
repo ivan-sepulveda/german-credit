@@ -53,3 +53,10 @@ print(paste("Accuracy: ", toString(accuracy*100) ))
 # OtherInstallmentPlans.Bank # SavingsAccountBonds.100.to.500 # Amount
 # CheckingAccountStatus.0.to.200 # CreditHistory.PaidDuly
 
+# Plotting Variable Importance
+control <- trainControl(method='repeatedcv', number = 10, repeats = 3)
+# Train the model
+model <- train(Class~., data=creditData, method = "lvq", preProcess = "scale", trControl = control)
+importance <- varImp(model, scale=FALSE)
+print(importance)
+plot(importance)
