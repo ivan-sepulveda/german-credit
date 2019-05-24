@@ -1,5 +1,6 @@
 library(caTools)
 library(psych)
+library(caret)
 relevantData <- read.csv('GermanCredit.csv')
 
 # The variables below were removed because they either improved accuracy
@@ -56,7 +57,7 @@ print(paste("Accuracy: ", toString(accuracy*100) ))
 # Plotting Variable Importance
 control <- trainControl(method='repeatedcv', number = 10, repeats = 3)
 # Train the model
-model <- train(Class~., data=creditData, method = "lvq", preProcess = "scale", trControl = control)
+model <- train(Class~., data=relevantData, method = "lvq", preProcess = "scale", trControl = control)
 importance <- varImp(model, scale=FALSE)
 print(importance)
 plot(importance)
